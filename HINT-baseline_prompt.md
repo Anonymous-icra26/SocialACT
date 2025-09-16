@@ -100,12 +100,12 @@ Emit only if **(A ∧ (B ∨ C))** holds:
 - If `confidence < medium`, **do not** emit `goal_signal`; choose `forward`/`stop` per safety.
 
 ### Negative constraints / disambiguation
-- 문 색/복도 분위기만으로 판단하지 말 것.
-- 난간/유리 반사는 **무효**.
-- 다른 번호(예: 203/205)가 더 일치하면 **거부**.
+- Do not decide based solely on door color or overall corridor appearance.
+- Treat railings and glass reflections as invalid evidence.
+- If another room number (e.g., 203/205) matches more strongly, reject the current goal hypothesis.
 
 ### Once-only rule
-- 조건 충족 시 **한 번만** `goal_signal`; 아니면 평소 정책대로 이동
+- When conditions are satisfied, emit goal_signal exactly once; otherwise, continue navigating under the standard policy.
 
 ### Mission success criterion
 - Success condition: If you output goal_signal within approximately 5 seconds (±50 frames at 2 Hz) around the frames where the destination appears, the mission is considered successful. You must output goal_signal exactly once, only when the visible symbol/text/appearance clearly matches the goal image. False positives count as failure.
